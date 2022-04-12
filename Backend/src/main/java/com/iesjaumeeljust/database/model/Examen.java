@@ -22,7 +22,6 @@ public class Examen {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	private float nota;
 	private Date fecha;
 	@ManyToOne
 	@JoinColumn(name = "asignatura")

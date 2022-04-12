@@ -31,4 +31,6 @@ public class Curso {
 	private Modulo modulo;
 	@OneToMany(mappedBy = "curso")
 	private Set<Asignatura> asignaturas;
+	@OneToMany(mappedBy = "curso")
+	private Set<Alumno> alumnos;
 }

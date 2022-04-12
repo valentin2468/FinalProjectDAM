@@ -1,32 +1,38 @@
 package com.iesjaumeeljust.database.model;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.UniqueConstraint;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
-@Entity
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Modulo {
+@Entity
+public class Alumno {
+	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy =  GenerationType.IDENTITY)
 	private Integer id;
-	@Column(unique = true)
 	private String nombre;
-	private Integer duracionAños;
-	//@OneToMany(mappedBy = "modulo")
-//	private Set<Curso> cursos;
+	@Column(unique = true)
+	private String dni;
+	private String direccion;
+	private String telefono;
+	private Date fechaNacimiento;
+	
+	@ManyToOne
+	@JoinColumn(name = "curso_alumno")
+	private Curso curso;
+	
 }
