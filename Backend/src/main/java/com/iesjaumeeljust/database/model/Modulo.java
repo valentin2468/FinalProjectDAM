@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.UniqueConstraint;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,9 +26,10 @@ public class Modulo {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
-	@Column(unique = true)
+	//@Column(unique = true)
 	private String nombre;
 	private Integer duracionAños;
-	//@OneToMany(mappedBy = "modulo")
-//	private Set<Curso> cursos;
+	@OneToMany(mappedBy = "modulo")
+	@JsonBackReference
+	private Set<Curso> cursos;
 }

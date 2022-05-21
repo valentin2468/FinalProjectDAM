@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,9 +31,12 @@ public class Curso {
 	private Integer año;
 	@ManyToOne
 	@JoinColumn(name = "modulo_curso")
+	@JsonManagedReference
 	private Modulo modulo;
 	@OneToMany(mappedBy = "curso")
+	@JsonBackReference
 	private Set<Asignatura> asignaturas;
 	@OneToMany(mappedBy = "curso")
+	@JsonBackReference
 	private Set<Alumno> alumnos;
 }

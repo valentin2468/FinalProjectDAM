@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -33,6 +35,7 @@ public class Alumno {
 	
 	@ManyToOne
 	@JoinColumn(name = "curso_alumno")
+	@JsonManagedReference
 	private Curso curso;
 	
 }
