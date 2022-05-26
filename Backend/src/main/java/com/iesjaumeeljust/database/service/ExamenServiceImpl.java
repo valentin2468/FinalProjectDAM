@@ -24,4 +24,9 @@ public class ExamenServiceImpl implements ExamenService{
 		return examenRepository.findById(id).get();
 	}
 
+	@Override
+	public List<Examen> findAllByAsignatura(Integer id) {
+		return examenRepository.findExamenesByAsignatura(id);
+	}
+
 }

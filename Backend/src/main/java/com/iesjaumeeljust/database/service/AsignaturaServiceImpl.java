@@ -24,4 +24,9 @@ public class AsignaturaServiceImpl implements AsignaturaService {
 		return asignaturaRepository.findById(id).get();
 	}
 
+	@Override
+	public List<Asignatura> findAllByCurso(Integer id) {
+		return asignaturaRepository.findAllByCurso(id);
+	}
+
 }

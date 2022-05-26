@@ -24,6 +24,11 @@ const routes = [
         name: 'Curso',
         component: () => import('@/views/Curso.vue'),
       },
+      {
+        path: '/alumno/:idAlumno',
+        name: 'Alumno',
+        component: () => import('@/views/Alumno.vue'),
+      },
     ],
   },
   {

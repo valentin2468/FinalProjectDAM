@@ -7,4 +7,5 @@ import com.iesjaumeeljust.database.model.Examen;
 public interface ExamenService {
 	public List<Examen> findAll();
 	public Examen findExamenById(Integer id);
+	public List<Examen> findAllByAsignatura(Integer id);
 }

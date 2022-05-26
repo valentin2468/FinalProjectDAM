@@ -1,8 +1,36 @@
 <template>
   <div>
     <h1>
-      Curso {{ $route.params.idCurso }} de {{ $route.query.nombreModulo }}
+      Curso {{ $route.query.añoCurso }} de {{ $route.query.nombreModulo }}
     </h1>
+    <CTable striped>
+      <CTableHead>
+        <CTableRow color="dark">
+          <CTableHeaderCell scope="col">ID</CTableHeaderCell>
+          <CTableHeaderCell scope="col">Nombre</CTableHeaderCell>
+          <CTableHeaderCell scope="col">Modulo</CTableHeaderCell>
+          <CTableHeaderCell scope="col">Curso</CTableHeaderCell>
+        </CTableRow>
+      </CTableHead>
+      <CTableBody>
+        <CTableRow color="info" v-for="alumno in alumnos" :key="alumno.id">
+          <CTableHeaderCell scope="row"
+            ><router-link
+              :to="{
+                path: '/alumno',
+                name: 'Alumno',
+                params: { idAlumno: alumno.id },
+              }"
+            >
+              {{ alumno.id }}
+            </router-link></CTableHeaderCell
+          >
+          <CTableDataCell>{{ alumno.nombre }}</CTableDataCell>
+          <CTableDataCell>{{ $route.query.nombreModulo }}</CTableDataCell>
+          <CTableDataCell>{{ $route.query.añoCurso }}</CTableDataCell>
+        </CTableRow>
+      </CTableBody>
+    </CTable>
   </div>
 </template>
 

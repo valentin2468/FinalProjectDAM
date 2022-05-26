@@ -18,6 +18,11 @@ public class AlumnoController {
 	
 	@Autowired
 	AlumnoService alumnoService;
+
+	@GetMapping("/alumno")
+	public Alumno getAlumnoById(@RequestParam("idAlumno") Integer id){
+		return alumnoService.findAlumnoById(id);
+	}
 	
 	@GetMapping("/alumnos")
 	public List<Alumno> getAlumnos(){

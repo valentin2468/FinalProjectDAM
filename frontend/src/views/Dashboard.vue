@@ -22,8 +22,9 @@
                 name: 'Curso',
                 query: {
                   nombreModulo: modulo.nombre,
+                  añoCurso: curso.año,
                 },
-                params: { idCurso: curso.año },
+                params: { idCurso: curso.id },
               }"
               >año {{ curso.año }}</router-link
             >
