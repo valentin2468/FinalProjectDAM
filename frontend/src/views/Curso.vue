@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="this.alumnos">
     <h1>
       Curso {{ $route.query.añoCurso }} de {{ $route.query.nombreModulo }}
     </h1>

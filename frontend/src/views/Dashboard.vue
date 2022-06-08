@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="this.modulos">
     MODULOS:
     <CAccordion>
       <CAccordionItem
@@ -42,15 +42,29 @@ export default {
   data() {
     return {
       modulos: [],
+      usuario: null,
     }
   },
   mounted() {
-    this.getModulos()
+    this.getProfesorUsuario()
   },
   methods: {
+    async getProfesorUsuario() {
+      console.log('hacemos un get del profesor asignado a este usuario')
+      await fetch(
+        `http://localhost:8081/api/usuario?idUsuario=${localStorage.getItem(
+          'username',
+        )}`,
+      )
+        .then((response) => response.json())
+        .then((response) => (this.usuario = response))
+        .then(() => this.getModulos())
+    },
     async getModulos() {
       console.log('hacemos un get de modulos')
-      await fetch('http://localhost:8081/api/profesor/modulos?idProfesor=1')
+      await fetch(
+        `http://localhost:8081/api/profesor/modulos?idProfesor=${this.usuario.profesor.id}`,
+      )
         .then((response) => response.json())
         .then((response) => (this.modulos = response))
         .then(() => this.saveCursos())
@@ -63,20 +77,6 @@ export default {
         this.modulos[i].cursos = await data.json()
       }
     },
-    /* async saveAlumnos() {
-      for (let modulo = 0; modulo < this.modulos.length; modulo++) {
-        for (
-          let curso = 0;
-          curso < this.modulos[modulo].cursos.length;
-          curso++
-        ) {
-          const data = await fetch(
-            `http://localhost:8081/api/alumnos/curso?idCurso=${this.modulos[modulo].cursos[curso].id}`,
-          )
-          this.modulos[modulo].cursos[curso].alumnos = await data.json()
-        }
-      }
-    }, */
   },
 }
 </script>

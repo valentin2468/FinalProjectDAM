@@ -13,6 +13,9 @@ const routes = [
       {
         path: '/dashboard',
         name: 'Dashboard',
+        meta: {
+          requiresAuth: true,
+        },
         // route level code-splitting
         // this generates a separate chunk (about.[hash].js) for this route
         // which is lazy-loaded when the route is visited.
@@ -22,14 +25,25 @@ const routes = [
       {
         path: '/curso/:idCurso',
         name: 'Curso',
+        meta: {
+          requiresAuth: true,
+        },
         component: () => import('@/views/Curso.vue'),
       },
       {
         path: '/alumno/:idAlumno',
         name: 'Alumno',
+        meta: {
+          requiresAuth: true,
+        },
         component: () => import('@/views/Alumno.vue'),
       },
     ],
+  },
+  {
+    path: '/login',
+    name: 'Login',
+    component: () => import('@/views/pages/Login'),
   },
   {
     path: '/pages',
@@ -52,11 +66,6 @@ const routes = [
         component: () => import('@/views/pages/Page500'),
       },
       {
-        path: 'login',
-        name: 'Login',
-        component: () => import('@/views/pages/Login'),
-      },
-      {
         path: 'register',
         name: 'Register',
         component: () => import('@/views/pages/Register'),
@@ -72,6 +81,18 @@ const router = createRouter({
     // always scroll to top
     return { top: 0 }
   },
+})
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((record) => record.meta.requiresAuth)) {
+    if (!localStorage.getItem('userToken')) {
+      next({ name: 'Login' })
+    } else {
+      next()
+    }
+  } else {
+    next()
+  }
 })
 
 export default router

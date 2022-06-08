@@ -25,26 +25,26 @@
     </CTable>
     <div>
       <CChart
-        type="line"
-        :wrapper="false"
+        type="radar"
         :data="{
           labels: [
-            'January',
-            'February',
-            'March',
-            'April',
-            'May',
-            'June',
-            'July',
+            'Programación',
+            'Base de Datos',
+            'Sistemas informáticos',
+            'Lenguajes de marcas',
+            'Entornos Desarrollo',
+            'FOL',
           ],
           datasets: [
             {
-              label: asignaturas[0].nombre,
+              label: 'NotasMedias',
               backgroundColor: 'rgba(220, 220, 220, 0.2)',
-              borderColor: 'rgba(220, 220, 220, 1)',
+              borderColor: 'rgba(150, 220, 220, 1)',
               pointBackgroundColor: 'rgba(220, 220, 220, 1)',
               pointBorderColor: '#fff',
-              data: [40, 20, 12, 39, 10, 40, 39],
+              pointHighlightFill: '#fff',
+              pointHighlightStroke: 'rgba(150, 220, 220, 1)',
+              data: [8, 4, 5, 9, 7, 10],
             },
           ],
         }"
@@ -59,7 +59,7 @@ export default {
   data() {
     return {
       loaded: false,
-      alumno: null,
+      alumno: '',
       asignaturas: [],
     }
   },
@@ -74,8 +74,8 @@ export default {
       )
         .then((response) => response.json())
         .then((response) => (this.alumno = response))
-        .then(() => (this.loaded = true))
-        .then(() => this.getAsignaturas())
+        .catch((error) => console.error(error))
+      this.getAsignaturas()
     },
     async getAsignaturas() {
       console.log('hacemos un get de asignaturas')
